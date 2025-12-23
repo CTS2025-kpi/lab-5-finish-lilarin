@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+httpx
+python-dotenv
+aiokafka
+prometheus-fastapi-instrumentator
+uhashring

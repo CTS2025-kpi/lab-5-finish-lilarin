@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: collections-service
+  namespace: lab2-microservices
+spec:
+  type: ClusterIP
+  selector:
+    app: collections-service
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

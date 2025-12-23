@@ -1,0 +1,7 @@
+mcp
+fastapi
+uvicorn
+httpx
+python-dotenv
+langchain-google-genai
+langchain-core

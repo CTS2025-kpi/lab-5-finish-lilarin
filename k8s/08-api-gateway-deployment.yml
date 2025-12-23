@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: lab2-microservices
+  labels:
+    app: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: lilarin/api-gateway:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: api-gateway-secrets
+                  key: JWT_SECRET
+            - name: SUPABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-gateway-secrets
+                  key: SUPABASE_URL
+            - name: SUPABASE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-gateway-secrets
+                  key: SUPABASE_KEY
+          envFrom:
+            - configMapRef:
+                name: microservices-config
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "200m"
