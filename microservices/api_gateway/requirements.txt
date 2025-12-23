@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+httpx
+python-dotenv
+aiokafka
+prometheus-fastapi-instrumentator
+authlib
+uvicorn
+PyJWT>=2.8.0
+cryptography

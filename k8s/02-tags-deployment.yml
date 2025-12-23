@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tags-service
+  namespace: lab2-microservices
+  labels:
+    app: tags-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tags-service
+  template:
+    metadata:
+      labels:
+        app: tags-service
+    spec:
+      containers:
+        - name: tags-service
+          image: lilarin/tags-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "200m"

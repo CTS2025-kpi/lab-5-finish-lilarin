@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filter-service
+  namespace: lab2-microservices
+  labels:
+    app: filter-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filter-service
+  template:
+    metadata:
+      labels:
+        app: filter-service
+    spec:
+      initContainers:
+        - name: wait-for-kafka
+          image: busybox:1.28
+          command: [ 'sh', '-c', 'until nc -z kafka-service 9092; do echo "waiting for kafka"; sleep 2; done;' ]
+      containers:
+        - name: filter-service
+          image: lilarin/filter-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: KAFKA_BROKER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: microservices-config
+                  key: KAFKA_BROKER_URL
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "200m"

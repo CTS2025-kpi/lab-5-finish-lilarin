@@ -1,0 +1,1 @@
+kubectl scale deployment router-service --replicas=0 -n lab2-microservices

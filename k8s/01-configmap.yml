@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: microservices-config
+  namespace: lab2-microservices
+data:
+  COLLECTIONS_SERVICE_URL: "http://collections-service:8000/api/v1"
+  TAGS_SERVICE_URL: "http://tags-service:8000/api/v1"
+  ACCOUNT_SERVICE_URL: "http://account-service:8000/api/v1"
+  LINKS_SERVICE_URL: "http://links-service:8000/api/v1"
+  FILTER_SERVICE_URL: "http://filter-service:8000/api/v1"
+  KAFKA_BROKER_URL: "kafka-service:9092"
+  ROUTER_SERVICE_URL: "http://router-service:8000/api/v1"
+  AI_SERVICE_URL: "http://ai-service:8000/api/v1"
